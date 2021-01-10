@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Number from './Number';
-import { Input } from "./Input";
+import { Input, Form } from "./Input";
 
 
 interface IState {
@@ -17,10 +17,17 @@ class App extends Component<{}, IState>{
     const { counter, value } = this.state;
     return (
       <div>
-        <Input value={value} onChange={this.onChange}></Input>
+        <Form onFormSubmit={this.onFormSubmit}>
+          <Input value={value} onChange={this.onChange}></Input>
+        </Form>
+
         <Number count={counter} /><button onClick={this.add}>Add</button>
       </div>
     );
+  }
+
+  onFormSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
   }
 
   onChange = (event: React.SyntheticEvent<HTMLInputElement>) => { console.log(event.target) }
